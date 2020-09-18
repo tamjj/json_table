@@ -16,6 +16,7 @@ class TableColumn extends StatelessWidget {
   final int highlightedRowIndex;
   final bool allowRowHighlight;
   final Color rowHighlightColor;
+  final int pageIndex;
 
   TableColumn(
     this.header,
@@ -27,6 +28,7 @@ class TableColumn extends StatelessWidget {
     this.highlightedRowIndex,
     this.allowRowHighlight,
     this.rowHighlightColor,
+    this.pageIndex,
   );
 
   @override
@@ -74,6 +76,7 @@ class TableColumn extends StatelessWidget {
                                 : null,
                             child: tableCellBuilder != null
                                 ? tableCellBuilder(
+                                    pageIndex,
                                     getFormattedValue(
                                       jsonUtils.get(
                                         rowMap,

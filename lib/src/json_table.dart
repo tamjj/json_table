@@ -7,7 +7,7 @@ import 'json_table_column.dart';
 import 'table_column.dart';
 
 typedef TableHeaderBuilder = Widget Function(String header);
-typedef TableCellBuilder = Widget Function(dynamic value);
+typedef TableCellBuilder = Widget Function(int pageIndex, dynamic value);
 typedef OnRowSelect = void Function(int index, dynamic map);
 
 class JsonTable extends StatefulWidget {
@@ -138,16 +138,16 @@ class _JsonTableState extends State<JsonTable> {
                         .where((item) => filterHeaderList.contains(item.field))
                         .map(
                           (item) => TableColumn(
-                            item.label,
-                            _getPaginatedData(),
-                            widget.tableHeaderBuilder,
-                            widget.tableCellBuilder,
-                            item,
-                            onRowTap,
-                            highlightedRowIndex,
-                            widget.allowRowHighlight,
-                            widget.rowHighlightColor,
-                          ),
+                              item.label,
+                              _getPaginatedData(),
+                              widget.tableHeaderBuilder,
+                              widget.tableCellBuilder,
+                              item,
+                              onRowTap,
+                              highlightedRowIndex,
+                              widget.allowRowHighlight,
+                              widget.rowHighlightColor,
+                              pageIndex),
                         )
                         .toList(),
                   )
@@ -155,16 +155,16 @@ class _JsonTableState extends State<JsonTable> {
                     children: filterHeaderList
                         .map(
                           (header) => TableColumn(
-                            header,
-                            _getPaginatedData(),
-                            widget.tableHeaderBuilder,
-                            widget.tableCellBuilder,
-                            null,
-                            onRowTap,
-                            highlightedRowIndex,
-                            widget.allowRowHighlight,
-                            widget.rowHighlightColor,
-                          ),
+                              header,
+                              _getPaginatedData(),
+                              widget.tableHeaderBuilder,
+                              widget.tableCellBuilder,
+                              null,
+                              onRowTap,
+                              highlightedRowIndex,
+                              widget.allowRowHighlight,
+                              widget.rowHighlightColor,
+                              pageIndex),
                         )
                         .toList(),
                   ),
@@ -198,7 +198,8 @@ class _JsonTableState extends State<JsonTable> {
     if (widget.columns != null) {
       widget.columns.forEach((item) {
         headers.add(item.field);
-        this.headerLabels[item.field] = item.label == null ? item.field : item.label;
+        this.headerLabels[item.field] =
+            item.label == null ? item.field : item.label;
       });
     } else {
       widget.dataList.forEach((map) {

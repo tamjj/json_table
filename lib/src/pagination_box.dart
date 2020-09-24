@@ -63,13 +63,13 @@ class PaginationBox extends StatelessWidget {
                 flex: 2,
                 child: TextFormField(
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                          color: Colors.grey.withOpacity(0.5), width: 2.0),
+                          color: Colors.grey.withOpacity(0.5), width: 0.0),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                          color: Colors.grey.withOpacity(0.5), width: 2.0),
+                          color: Colors.grey.withOpacity(0.5), width: 0.0),
                     ),
                   ),
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],

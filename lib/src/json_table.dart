@@ -192,6 +192,7 @@ class _JsonTableState extends State<JsonTable> {
                         pageIndex--;
                       });
                       _pageController.text = '${pageIndex + 1}';
+                      FocusScope.of(context).unfocus();
                     }
                   : null,
               onRightButtonTap: showRightButton()
@@ -200,6 +201,7 @@ class _JsonTableState extends State<JsonTable> {
                         pageIndex++;
                       });
                       _pageController.text = '${pageIndex + 1}';
+                      FocusScope.of(context).unfocus();
                     }
                   : null,
               pageController: _pageController,

@@ -57,8 +57,8 @@ class PaginationBox extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
               SizedBox(
-                height: 21,
-                width: double.infinity,
+                height: 20,
+                width: 30,
                 child: TextFormField(
                   decoration: InputDecoration(
                     border: InputBorder.none,

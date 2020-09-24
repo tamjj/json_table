@@ -51,20 +51,26 @@ class PaginationBox extends StatelessWidget {
               textAlign: TextAlign.center,
             ),*/
             child: Row(
-              children: [
-                Text(
-                  "Page ",
-                  textAlign: TextAlign.left,
-                ),
-                TextField(
-                  controller: pageController,
-                ),
-                Text(
-                  " of $pagesCount",
-                  textAlign: TextAlign.right,
-                ),
-              ],
-            ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    // wrap your Column in Expanded
+                    child: Column(children: [
+                      Text(
+                        "Page ",
+                        textAlign: TextAlign.left,
+                      ),
+                      TextField(
+                        controller: pageController,
+                      ),
+                      Text(
+                        " of $pagesCount",
+                        textAlign: TextAlign.right,
+                      ),
+                    ]),
+                  ),
+                ]),
           ),
           Material(
             type: MaterialType.circle,

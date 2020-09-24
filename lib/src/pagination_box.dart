@@ -53,17 +53,20 @@ class PaginationBox extends StatelessWidget {
             ),*/
             child: Row(children: [
               Expanded(
-                flex: 4,
+                flex: 3,
                 child: Text(
                   "Page ",
                   textAlign: TextAlign.left,
                 ),
               ),
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: TextFormField(
                   decoration: InputDecoration(
-                    border: InputBorder.none,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Colors.grey.withOpacity(0.5), width: 2.0),
+                    ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                           color: Colors.grey.withOpacity(0.5), width: 2.0),
@@ -75,7 +78,7 @@ class PaginationBox extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 4,
+                flex: 3,
                 child: Text(
                   " of $pagesCount",
                   textAlign: TextAlign.right,

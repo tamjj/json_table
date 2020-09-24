@@ -56,7 +56,7 @@ class PaginationBox extends StatelessWidget {
                 flex: 3,
                 child: Text(
                   "Page ",
-                  textAlign: TextAlign.left,
+                  textAlign: TextAlign.center,
                 ),
               ),
               Expanded(
@@ -81,7 +81,7 @@ class PaginationBox extends StatelessWidget {
                 flex: 3,
                 child: Text(
                   " of $pagesCount",
-                  textAlign: TextAlign.right,
+                  textAlign: TextAlign.center,
                 ),
               ),
             ]),

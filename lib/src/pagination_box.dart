@@ -52,34 +52,24 @@ class PaginationBox extends StatelessWidget {
               textAlign: TextAlign.center,
             ),*/
             child: Row(children: [
-              Flexible(
-                flex: 3,
-                child: Text(
-                  "Page ",
-                  textAlign: TextAlign.left,
-                ),
+              Text(
+                "Page ",
+                textAlign: TextAlign.left,
               ),
-              Flexible(
+              Expanded(
                 flex: 1,
-                fit: FlexFit.tight,
-                child: Expanded(
-                  flex: 1,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                    ),
-                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                    keyboardType: TextInputType.number,
-                    controller: pageController,
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
                   ),
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  keyboardType: TextInputType.number,
+                  controller: pageController,
                 ),
               ),
-              Flexible(
-                flex: 3,
-                child: Text(
-                  " of $pagesCount",
-                  textAlign: TextAlign.right,
-                ),
+              Text(
+                " of $pagesCount",
+                textAlign: TextAlign.right,
               ),
             ]),
           ),

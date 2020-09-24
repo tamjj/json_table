@@ -216,6 +216,8 @@ class _JsonTableState extends State<JsonTable> {
                       } else {
                         pageIndex = 0;
                         _pageController.text = '${pageIndex + 1}';
+                        _pageController.selection = TextSelection.fromPosition(
+                            TextPosition(offset: _pageController.text.length));
                       }
                     });
                   }

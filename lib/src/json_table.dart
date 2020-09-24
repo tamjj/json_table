@@ -191,6 +191,7 @@ class _JsonTableState extends State<JsonTable> {
                       setState(() {
                         pageIndex--;
                       });
+                      _pageController.text = '${pageIndex + 1}';
                     }
                   : null,
               onRightButtonTap: showRightButton()
@@ -198,13 +199,15 @@ class _JsonTableState extends State<JsonTable> {
                       setState(() {
                         pageIndex++;
                       });
+                      _pageController.text = '${pageIndex + 1}';
                     }
                   : null,
               pageController: _pageController,
               onPagesChanged: (value) {
                 if (_debouncePage?.isActive ?? false) _debouncePage.cancel();
                 _debouncePage = Timer(const Duration(milliseconds: 1000), () {
-                  if (_pageController.text.isNotEmpty) {
+                  if (_pageController.text.isNotEmpty &&
+                      _pageController.text.trim() != pageIndex.toString()) {
                     setState(() {
                       if (value > 0 && value <= pagesCount) {
                         pageIndex = value - 1;

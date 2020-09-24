@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 typedef OnPageChange = void Function(int pageNo);
 
@@ -55,8 +56,14 @@ class PaginationBox extends StatelessWidget {
                 "Page ",
                 textAlign: TextAlign.left,
               ),
-              Expanded(
+              SizedBox(
+                height: 21,
+                width: double.infinity,
                 child: TextFormField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                  inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
                   controller: pageController,
                 ),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -49,6 +50,8 @@ class _JsonTableState extends State<JsonTable> {
   int pagesCount;
   List<Map> data;
   Map<String, String> headerLabels = Map<String, String>();
+  TextEditingController _pageController;
+  Timer _debouncePage;
 
   @override
   void initState() {
@@ -66,6 +69,16 @@ class _JsonTableState extends State<JsonTable> {
     if (_showPagination())
       pagesCount = (data.length / paginationRowCount).ceil();
     setHeaderList();
+    _pageController = TextEditingController(text: '${pageIndex + 1}');
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    if (_debouncePage != null) {
+      _debouncePage.cancel();
+    }
+    super.dispose();
   }
 
   @override
@@ -187,6 +200,22 @@ class _JsonTableState extends State<JsonTable> {
                       });
                     }
                   : null,
+              pageController: _pageController,
+              onPagesChanged: (value) {
+                if (_debouncePage?.isActive ?? false) _debouncePage.cancel();
+                _debouncePage = Timer(const Duration(milliseconds: 1000), () {
+                  if (_pageController.text.isNotEmpty) {
+                    setState(() {
+                      if (value > 0 && value < pagesCount) {
+                        pageIndex = value;
+                      } else {
+                        pageIndex = 0;
+                      }
+                      _pageController.text = '${pageIndex + 1}';
+                    });
+                  }
+                });
+              },
             ),
         ],
       ),

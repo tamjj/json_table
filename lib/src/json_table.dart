@@ -206,12 +206,12 @@ class _JsonTableState extends State<JsonTable> {
                 _debouncePage = Timer(const Duration(milliseconds: 1000), () {
                   if (_pageController.text.isNotEmpty) {
                     setState(() {
-                      if (value > 0 && value < pagesCount) {
-                        pageIndex = value;
+                      if (value > 0 && value <= pagesCount) {
+                        pageIndex = value - 1;
                       } else {
                         pageIndex = 0;
+                        _pageController.text = '${pageIndex + 1}';
                       }
-                      _pageController.text = '${pageIndex + 1}';
                     });
                   }
                 });

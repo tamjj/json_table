@@ -209,7 +209,7 @@ class _JsonTableState extends State<JsonTable> {
                 if (_debouncePage?.isActive ?? false) _debouncePage.cancel();
                 _debouncePage = Timer(const Duration(milliseconds: 1000), () {
                   if (_pageController.text.isNotEmpty &&
-                      _pageController.text.trim() != pageIndex.toString()) {
+                      value != pageIndex - 1) {
                     setState(() {
                       if (value > 0 && value <= pagesCount) {
                         pageIndex = value - 1;

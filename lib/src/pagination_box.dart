@@ -64,10 +64,10 @@ class PaginationBox extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0.0, 4.0, 0.0, 4.0),
                   child: TextFormField(
-                    expands: true,
                     textAlignVertical: TextAlignVertical.center,
                     textAlign: TextAlign.left,
                     decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(10.0),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                             color: Colors.grey.withOpacity(0.5), width: 0.0),

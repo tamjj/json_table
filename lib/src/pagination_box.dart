@@ -59,22 +59,25 @@ class PaginationBox extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              Expanded(
-                flex: 2,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Colors.grey.withOpacity(0.5), width: 0.0),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Expanded(
+                  flex: 2,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Colors.grey.withOpacity(0.5), width: 0.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Colors.grey.withOpacity(0.5), width: 0.0),
+                      ),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Colors.grey.withOpacity(0.5), width: 0.0),
-                    ),
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    keyboardType: TextInputType.number,
+                    controller: pageController,
                   ),
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  keyboardType: TextInputType.number,
-                  controller: pageController,
                 ),
               ),
               Expanded(

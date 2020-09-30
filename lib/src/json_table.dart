@@ -12,6 +12,10 @@ typedef TableCellBuilder = Widget Function(int pageIndex, dynamic value);
 typedef OnRowSelect = void Function(int index, dynamic map);
 
 class JsonTable extends StatefulWidget {
+  static of(BuildContext context, {bool root = false}) => root
+      ? context.findRootAncestorStateOfType<_JsonTableState>()
+      : context.findAncestorStateOfType<_JsonTableState>();
+
   final List dataList;
   final TableHeaderBuilder tableHeaderBuilder;
   final TableCellBuilder tableCellBuilder;
@@ -23,19 +27,18 @@ class JsonTable extends StatefulWidget {
   final String filterTitle;
   final OnRowSelect onRowSelect;
 
-  JsonTable(
-    this.dataList, {
-    Key key,
-    this.tableHeaderBuilder,
-    this.tableCellBuilder,
-    this.columns,
-    this.showColumnToggle = false,
-    this.allowRowHighlight = false,
-    this.filterTitle = 'ADD FILTERS',
-    this.rowHighlightColor,
-    this.paginationRowCount,
-    this.onRowSelect,
-  }) : super(key: key);
+  JsonTable(this.dataList,
+      {Key key,
+      this.tableHeaderBuilder,
+      this.tableCellBuilder,
+      this.columns,
+      this.showColumnToggle = false,
+      this.allowRowHighlight = false,
+      this.filterTitle = 'ADD FILTERS',
+      this.rowHighlightColor,
+      this.paginationRowCount,
+      this.onRowSelect})
+      : super(key: key);
 
   @override
   _JsonTableState createState() => _JsonTableState();
@@ -262,6 +265,16 @@ class _JsonTableState extends State<JsonTable> {
         highlightedRowIndex = index;
     });
     if (widget.onRowSelect != null) widget.onRowSelect(index, rowMap);
+  }
+
+  gotoPage(int index) {
+    if (this.pageIndex != index) {
+      setState(() {
+        this.pageIndex = index;
+      });
+      _pageController.text = '${pageIndex + 1}';
+      FocusScope.of(context).unfocus();
+    }
   }
 
   List _getPaginatedData() {

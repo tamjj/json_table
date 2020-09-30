@@ -280,6 +280,7 @@ class _JsonTableState extends State<JsonTable> {
       /*setState(() {
         this.pageIndex = index;
       });*/
+      print('IIIIIIIIIIIIIIIIIIIIIIndex is $index');
       if (_pageController != null) {
         _pageController.text = '${index + 1}';
         if (context != null) {

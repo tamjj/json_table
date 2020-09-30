@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:eventify/eventify.dart' as eventify;
 import 'package:flutter/material.dart';
 import 'package:json_table/src/pagination_box.dart';
 
@@ -12,10 +13,6 @@ typedef TableCellBuilder = Widget Function(int pageIndex, dynamic value);
 typedef OnRowSelect = void Function(int index, dynamic map);
 
 class JsonTable extends StatefulWidget {
-  static of(BuildContext context, {bool root = false}) => root
-      ? context.findRootAncestorStateOfType<_JsonTableState>()
-      : context.findAncestorStateOfType<_JsonTableState>();
-
   final List dataList;
   final TableHeaderBuilder tableHeaderBuilder;
   final TableCellBuilder tableCellBuilder;
@@ -26,6 +23,7 @@ class JsonTable extends StatefulWidget {
   final int paginationRowCount;
   final String filterTitle;
   final OnRowSelect onRowSelect;
+  final eventify.EventEmitter emitter;
 
   JsonTable(this.dataList,
       {Key key,
@@ -37,7 +35,8 @@ class JsonTable extends StatefulWidget {
       this.filterTitle = 'ADD FILTERS',
       this.rowHighlightColor,
       this.paginationRowCount,
-      this.onRowSelect})
+      this.onRowSelect,
+      this.emitter})
       : super(key: key);
 
   @override
@@ -55,6 +54,7 @@ class _JsonTableState extends State<JsonTable> {
   Map<String, String> headerLabels = Map<String, String>();
   TextEditingController _pageController;
   Timer _debouncePage;
+  eventify.Listener _subscriber;
 
   @override
   void initState() {
@@ -81,6 +81,9 @@ class _JsonTableState extends State<JsonTable> {
     if (_debouncePage != null) {
       _debouncePage.cancel();
     }
+    if (_subscriber != null) {
+      _subscriber.cancel();
+    }
     super.dispose();
   }
 
@@ -92,6 +95,11 @@ class _JsonTableState extends State<JsonTable> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.emitter != null) {
+      _subscriber = widget.emitter.on('gotoPage', null, (event, eventContext) {
+        this.gotoPage(int.parse(event.eventData) ?? 0);
+      });
+    }
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Column(

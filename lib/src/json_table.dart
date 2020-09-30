@@ -77,7 +77,7 @@ class _JsonTableState extends State<JsonTable> {
 
   @override
   void dispose() {
-    _pageController.dispose();
+    //_pageController.dispose();
     if (_debouncePage != null) {
       _debouncePage.cancel();
     }

@@ -282,7 +282,9 @@ class _JsonTableState extends State<JsonTable> {
       });*/
       if (_pageController != null) {
         _pageController.text = '${index + 1}';
-        FocusScope.of(context).unfocus();
+        if (context != null) {
+          FocusScope.of(context).unfocus();
+        }
       }
     }
   }

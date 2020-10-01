@@ -277,12 +277,14 @@ class _JsonTableState extends State<JsonTable> {
 
   gotoPage(int index) {
     if (pageIndex != index) {
-      setState(() {
-        pageIndex = index;
-      });
-      _pageController.text = '${index + 1}';
-      if (context != null) {
-        FocusScope.of(context).unfocus();
+      if (mounted) {
+        setState(() {
+          pageIndex = index;
+        });
+        _pageController.text = '${index + 1}';
+        if (context != null) {
+          FocusScope.of(context).unfocus();
+        }
       }
     }
   }

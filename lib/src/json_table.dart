@@ -77,7 +77,7 @@ class _JsonTableState extends State<JsonTable> {
 
   @override
   void dispose() {
-    //_pageController.dispose();
+    _pageController.dispose();
     if (_debouncePage != null) {
       _debouncePage.cancel();
     }
@@ -276,16 +276,13 @@ class _JsonTableState extends State<JsonTable> {
   }
 
   gotoPage(int index) {
-    if (this.pageIndex != index) {
-      /*setState(() {
-        this.pageIndex = index;
-      });*/
-      print('IIIIIIIIIIIIIIIIIIIIIIndex is $index');
-      if (_pageController != null) {
-        _pageController.text = '${index + 1}';
-        if (context != null) {
-          FocusScope.of(context).unfocus();
-        }
+    if (pageIndex != index) {
+      setState(() {
+        pageIndex = index;
+      });
+      _pageController.text = '${index + 1}';
+      if (context != null) {
+        FocusScope.of(context).unfocus();
       }
     }
   }
